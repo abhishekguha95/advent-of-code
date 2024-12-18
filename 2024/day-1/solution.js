@@ -44,7 +44,23 @@ async function readInput(path) {
 	});
 }
 
-function part2() {}
+async function part2() {
+	let { list1, list2 } = await readInput("input.txt");
+	console.log("init len", list2.length);
+	console.log("unique ele len", list2.length);
+	const freqMap = new Map();
+	for (ele of list2) {
+		if (freqMap.has(ele)) freqMap.set(ele, freqMap.get(ele) + 1);
+		else freqMap.set(ele, 1);
+	}
+	let total = 0;
+	
+	// more handling would be needed if list1 has repeat elements. in my input list1 already has unique elements.
+	for (ele of list1) {
+		if (freqMap.has(ele)) total = total + ele * freqMap.get(ele);
+	}
+	console.log("total", total);
+}
 
 function sortList(list) {
 	return list.sort((a, b) => a - b);
@@ -59,7 +75,8 @@ function findDiff(list1, list2) {
 }
 
 function main() {
-	part1();
+	// part1();
+	part2();
 }
 
 main();
